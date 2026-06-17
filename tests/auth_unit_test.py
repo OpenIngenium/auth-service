@@ -18,9 +18,10 @@ IAS-9	The IAS shall support the following scopes: admin, execute:wsts, execute:t
 
 
 API Endpoint Source:
-https://github.com/OpenIngenium/auth-service/blob/main/auth_service/api/swagger/swagger.yaml
+https://github.jpl.nasa.gov/Ingenium/auth-prototype/blob/master/auth_service/api/swagger/swagger.yaml
 
 This test with either pull a username and password from an environment variable or prompt the user for a password
+
 
 Usage:
  - Run all tests

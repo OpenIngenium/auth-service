@@ -183,4 +183,6 @@ mysql> select * from RoleUsers;
 6 rows in set (0.00 sec)
 ```
 
+## Contact
+Ingenium Development Team: ingenium-dev@jpl.nasa.gov
 
