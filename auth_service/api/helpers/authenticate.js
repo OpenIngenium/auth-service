@@ -24,7 +24,7 @@ module.exports.ldap_authenticate = function ldap_authenticate(username, password
     try {
         var client = ldap.createClient({
             url: ldapUrl,
-            tlsOptions: { secureProtocol: "TLSv1_method"}
+            tlsOptions: env_config.ldap_tls_options
         });
         client.on('error', function(err) {
             log.warning('LDAP error in authenticate function:', util.inspect(err));

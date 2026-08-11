@@ -32,6 +32,14 @@ module.exports.RSA_CLIENT_KEY = RSA_CLIENT_KEY;
 module.exports.PUBLIC_PEM = PUBLIC_PEM;
 module.exports.PRIVATE_PEM = PRIVATE_PEM;
 
+// TLS options for the configured LDAP server. Override via env/config if your
+// LDAP server requires a different TLS version or cipher policy.
+module.exports.ldap_tls_options = {
+  minVersion: 'TLSv1',
+  maxVersion: 'TLSv1',
+  ciphers: 'DEFAULT@SECLEVEL=0'
+};
+
 module.exports.ACCESS_TOKEN_TIMEOUT = '3410s';
 module.exports.TEN_SEC_OFFSET = 10;
 module.exports.PORT = 8080;

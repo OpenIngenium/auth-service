@@ -22,6 +22,10 @@
 
 node_modules
 
+# Test coverage #
+#################
+coverage
+
 # Logs and databases #
 ######################
 *.log

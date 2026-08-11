@@ -15,7 +15,8 @@ const ldap_url = env_config.ldap_url;
 function create_client() {
     var client = ldap.createClient({
         url: ldap_url,
-        reconnect: false
+        reconnect: false,
+        tlsOptions: env_config.ldap_tls_options
     });
     client.on('error', function(err) {
         log.warning('LDAP connection failed.', util.inspect(err));

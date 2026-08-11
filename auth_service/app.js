@@ -18,7 +18,6 @@ const node_funcs = require('./node_funcs.js');
 var index = require('./server/models/index.js');
 var Sequelize = require('sequelize');
 var util = require('util');
-var sleep = require('sleep');
 const PUBLIC_PEM = env_config.PUBLIC_PEM;
 
 // initialize Log Level

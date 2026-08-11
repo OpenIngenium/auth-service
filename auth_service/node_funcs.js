@@ -4,6 +4,7 @@ var jwt = require('jsonwebtoken');
 const env_config = require('./env_config.js');
 var winston = require('winston');
 const MESSAGE = Symbol.for('message');
+const SPLAT = Symbol.for('splat');
 const PUBLIC_PEM = env_config.PUBLIC_PEM;
 
 /**
@@ -30,6 +31,16 @@ const json_formatter = (log_entry) => {
   // meta is the object passed as the 2nd argument to the logging function.
   // If multiple objects are passed, meta will be an array.
   let log_entry_meta = log_entry['meta'];
+
+  // winston 3 no longer sets `meta`; extra args land on the SPLAT symbol as an
+  // array. A single extra arg is unwrapped so the branches below behave as they
+  // did under winston 2 (string -> details, object -> merge, etc.).
+  if (log_entry_meta === undefined) {
+    const splat = log_entry[SPLAT];
+    if (Array.isArray(splat) && splat.length > 0) {
+      log_entry_meta = splat.length === 1 ? splat[0] : splat;
+    }
+  }
 
   if (log_entry_meta) {
     // If the passed object is string, array, or object with no properties, 

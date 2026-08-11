@@ -10,9 +10,14 @@ const migrate = require('../migrate.js');
 var Promise = require('bluebird');
 var env_config = require(path.join(process.env.PWD, '/env_config.js'));
 const node_funcs = require('../../node_funcs.js');
-var sleep = require('sleep');
 
 const log = node_funcs.log;
+
+// Synchronous blocking sleep (in seconds) implemented with Atomics.wait so the
+// image builds on modern Node without the native `sleep` addon / a compiler.
+function sleepSeconds(seconds) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, seconds * 1000);
+}
 
 // If database doesn't exist, then make it.
 try{
@@ -47,7 +52,7 @@ async function init_db(count) {
   if (count > 0) {
     log.info(`Attempting to connect to DB. Remaining count: ${count}`);
     // sleep for 5 seconds, set to 5 so that full migration script can be ran without being cut off
-    sleep.sleep(5);
+    sleepSeconds(5);
     try {
       const res = await sequelize.query(" SELECT COUNT(*) AS count FROM information_schema.tables WHERE table_schema = 'auth';", { type: sequelize.QueryTypes.SELECT});
       if (res[0].count === 0) {
