@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - devel
+      - main
+  pull_request:
+    branches:
+      - devel
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'auth_service/.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: 'auth_service/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: auth_service
+        run: npm ci --legacy-peer-deps
+
+      - name: Run tests with coverage
+        working-directory: auth_service
+        run: npm run test:coverage
+
+  docker:
+    name: Docker Build
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t auth-service:${{ github.sha }} auth_service
