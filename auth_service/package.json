@@ -1,0 +1,49 @@
+{
+  "name": "auth-management",
+  "version": "0.0.1",
+  "private": true,
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^1.20.0",
+    "basic-auth": "^2.0.1",
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "express": "^4.22.3",
+    "express-interceptor": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "ldapjs": "^1.0.1",
+    "lodash": "^4.17.21",
+    "ms": "^2.1.3",
+    "mysql": "^2.18.1",
+    "redis": "^2.8.0",
+    "sequelize": "^3.35.1",
+    "swagger-express-mw": "0.1.0",
+    "swagger-tools": "^0.9.16",
+    "umzug": "2.0.1",
+    "uuid": "^3.4.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sequelize-cli": "^2.5.1"
+  },
+  "overrides": {
+    "request": {
+      "form-data": "^2.5.6"
+    }
+  },
+  "scripts": {
+    "postinstall": "node scripts/patch-bagpipes.js",
+    "start": "node app.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "engines": {
+    "node": "22.23.4"
+  }
+}

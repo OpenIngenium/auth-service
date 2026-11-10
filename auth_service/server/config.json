@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "pwpwpw",
+    "database": "auth",
+    "host": "auth_service_mysql",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "pwpwpw",
+    "database": "auth",
+    "host": "auth_service_mysql",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "pwpwpw",
+    "database": "auth",
+    "host": "auth_service_mysql",
+    "dialect": "mysql"
+  }
+}
